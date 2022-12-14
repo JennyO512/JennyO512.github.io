@@ -29,13 +29,15 @@ def main():
 
     bmi = weight/(height**2) * 703
 
+    print()
     print(f"Your Earth BMI is: {bmi:.2F}")
     print()
 
     #weightonEarth = float(input("Enter Your Weight on Earth: "))
     weightonMoon = round((weight*1.622)/9.81,2)
     moonpounds = weightonMoon * 2.205
-    print(f"But you are only {moonpounds:.2f} pounds on the moon 🚀  ")
+    print(f"🚀 But you are only {moonpounds:.2f} pounds on the moon 🚀  ")
+    print()
 
 
 
