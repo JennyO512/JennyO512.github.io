@@ -1,6 +1,6 @@
-from project import convert_height
-from project import calcuate_weight
-from project import cal_bmi
+from BMI.project import convert_height
+from BMI.project import calcuate_weight
+from BMI.project import cal_bmi
 
 
 
