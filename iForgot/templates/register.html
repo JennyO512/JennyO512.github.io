@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+<form id="register-form" action="/register" method="post">
+    <div class="form-group">
+        <input autocomplete="off" autofocus class="form-control c" name="username" placeholder="Username" type="text">
+    </div>
+    <div class="form-group">
+        <input id="password" autocomplete="off" autofocus class="form-control c" name="password" placeholder="Password" type="text" onchange="check()">
+    </div>
+    <div class="form-group">
+        <input id="confirm" autocomplete="off" autofocus class="form-control c" name="confirmation" placeholder="Confirmation" type="text">
+    </div>
+    <button id="submit" class="btn btn-dark" type="submit">Register</button>
+</form>
+{% endblock %}

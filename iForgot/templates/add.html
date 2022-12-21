@@ -1,0 +1,22 @@
+{% extends "stuff.html" %}
+
+{% block title %}
+    Add Note
+{% endblock %}
+{% block main %}
+    <h1>Add Note</h1>
+
+    <!--form action="/notes/add-note" method="post">
+        <input type="text" placeholder="Add Note" name="new_note"><br>
+        <input type="submit" value="Submit">
+    </form-->
+
+      <p>To Add a new note, enter text in the box and click 'Add'</p>
+
+      <form action="/notes/add-note" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="new_note" placeholder="Add Note" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Add</button>
+    </form>
+{% endblock %}
