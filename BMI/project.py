@@ -30,7 +30,7 @@ def main():
     bmi = weight/(height**2) * 703
 
     print()
-    print(f"🌎 Your Earth BMI is: {bmi:.2F} 🌎 ")
+    print(f"🌎 Your BMI is: {bmi:.2F} 🌎 ")
     print()
 
     #weightonEarth = float(input("Enter Your Weight on Earth: "))
