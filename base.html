@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+* {box-sizing: border-box;}
+
+.img-comp-container {
+  position: relative;
+  height: 200px; /*should be the same height as the images*/
+  padding: 10px
+}
+
+.img-comp-img {
+  position: absolute;
+  width: auto;
+  height: auto;
+  overflow:hidden;
+}
+
+.img-comp-img img {
+  display:block;
+  vertical-align:middle;
+}
+
+.img-comp-slider {
+  position: absolute;
+  z-index:9;
+  cursor: ew-resize;
+  /*set the appearance of the slider:*/
+  width: 40px;
+  height: 40px;
+  background-color: #2196F3;
+  opacity: 0.7;
+  border-radius: 50%;
+}
+.w3-image {
+  height: auto;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-color: clear;
+  padding: 10px;
+}
+
+.w3-border-bottom {
+  border-bottom: 1px solid #ccc!important;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+}
+
+.footer {
+  background-color: #f1f1f1;
+  padding: 15px;
+  text-align: center;
+}
+
+.social-icons {
+  display: inline-flex;
+  list-style: none;
+  padding: 0;
+}
+
+.social-icons li {
+  margin: 0 5px;
+}
+
+.social-icons a {
+  display: block;
+  color: #333;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  color: #2196F3;
+}
+.responsive-image {
+  width: auto;
+  height: auto;
+}
+.w3-row-padding{
+  padding: 15px
+}
+.w3-col{
+  padding: 15px
+}
+.w3-display-container {
+  position: relative;
+}
+.w3-display-middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.fancy-text {
+  font-style: italic;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1.5em;
+  color: #4a235a;
+}
+</style>
+<script>
+function initComparisons() {
+  var x, i;
+  /*find all elements with an "overlay" class:*/
+  x = document.getElementsByClassName("img-comp-overlay");
+  for (i = 0; i < x.length; i++) {
+    /*once for each "overlay" element:
+    pass the "overlay" element as a parameter when executing the compareImages function:*/
+    compareImages(x[i]);
+  }
+  function compareImages(img) {
+    var slider, img, clicked = 0, w, h;
+    /*get the width and height of the img element*/
+    w = img.offsetWidth;
+    h = img.offsetHeight;
+    /*set the width of the img element to 50%:*/
+    img.style.width = (w / 2) + "px";
+    /*create slider:*/
+    slider = document.createElement("DIV");
+    slider.setAttribute("class", "img-comp-slider");
+    /*insert slider*/
+    img.parentElement.insertBefore(slider, img);
+    /*position the slider in the middle:*/
+    slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
+    slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+    /*execute a function when the mouse button is pressed:*/
+    slider.addEventListener("mousedown", slideReady);
+    /*and another function when the mouse button is released:*/
+    window.addEventListener("mouseup", slideFinish);
+    /*or touched (for touch screens:*/
+    slider.addEventListener("touchstart", slideReady);
+    /*and released (for touch screens:*/
+    window.addEventListener("touchend", slideFinish);
+    function slideReady(e) {
+      /*prevent any other actions that may occur when moving over the image:*/
+      e.preventDefault();
+      /*the slider is now clicked and ready to move:*/
+      clicked = 1;
+      /*execute a function when the slider is moved:*/
+      window.addEventListener("mousemove", slideMove);
+      window.addEventListener("touchmove", slideMove);
+    }
+    function slideFinish() {
+      /*the slider is no longer clicked:*/
+      clicked = 0;
+    }
+    function slideMove(e) {
+      var pos;
+      /*if the slider is no longer clicked, exit this function:*/
+      if (clicked == 0) return false;
+      /*get the cursor's x position:*/
+      pos = getCursorPos(e)
+      /*prevent the slider from being positioned outside the image:*/
+      if (pos < 0) pos = 0;
+      if (pos > w) pos = w;
+      /*execute a function that will resize the overlay image according to the cursor:*/
+      slide(pos);
+    }
+    function getCursorPos(e) {
+      var a, x = 0;
+      e = (e.changedTouches) ? e.changedTouches[0] : e;
+      /*get the x positions of the image:*/
+      a = img.getBoundingClientRect();
+      /*calculate the cursor's x coordinate, relative to the image:*/
+      x = e.pageX - a.left;
+      /*consider any page scrolling:*/
+      x = x - window.pageXOffset;
+      return x;
+    }
+    function slide(x) {
+      /*resize the image:*/
+      img.style.width = x + "px";
+      /*position the slider:*/
+      slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+    }
+  }
+}
+</script>
+</head>
+<body>
+
+  <!-- Navbar (sit on top) -->
+  <div class="w3-top">
+    <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+      <a href="#home" class="w3-bar-item w3-button"><b>Style</b> Snap</a>
+      <!-- Float links to the right. Hide them on small screens -->
+      <div class="w3-right w3-hide-small">
+        <a href="#projects" class="w3-bar-item w3-button">Home</a>
+        <a href="#about" class="w3-bar-item w3-button">About</a>
+        <a href="#contact" class="w3-bar-item w3-button">Contact</a>
+      </div>
+    </div>
+  </div>
+<div class="w3-row-padding"></div>
+<br>
+<div class="w3-row-padding"></div>
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-wide" style="width: 100%;" id="home">
+  <img id="changingImage" class="w3-image w3-responsive" src="output_0.png" alt="Kitchen" style="width: 100%; height: auto; object-fit: cover;">
+  <div class="w3-display-middle w3-margin-top w3-center">
+    <h1 class="w3-xxlarge w3-text-white"><span class="w3-padding w3-black w3-opacity-min"><b>Style</b> Snap</span></h1>
+  </div>
+</header>
+
+
+<!-- Page content -->
+<div class="w3-content w3-padding" style="max-width:1564px">
+
+    <!-- Project Section -->
+<div class="w3-container w3-padding-32" id="projects">
+<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Style</h3>
+</div>
+
+
+<!--THIS IS THE PART i'M STUCK ON BELOW-->  
+<div class="w3-row-padding">
+<h1>Update your rooms Style in a Snap 🛋️🖼️ </h1>
+<h4>Remove the clutter and/or toys from your space</h4>
+<p class="fancy-text">Drag the circle from left to right:</p>
+</div>
+<!-- Photo Grid -->
+<div class="w3-row" id="myGrid" style="margin-bottom:128px">
+<!--div class="w3-row-padding"-->
+  <div class="w3-col l3 m6 w3-margin-bottom">
+    <div class="w3-display-container">
+      
+
+  <div class="img-comp-container">
+      <div class="img-comp-img">
+          <img src="livingroom.png" alt="living room before" style="border:5px solid black" width="500" height="300">
+          </div>
+      <div class="img-comp-img img-comp-overlay">
+          <img src="livingroom2.png" alt="living room after"style="border:5px solid black" width="500" height="300">
+          </div>
+  </div>
+
+    </div>
+  </div>
+</div>
+<!--maybe-->
+<br>
+<div  class="w3-row-padding">
+<p class="fancy-text">From Living Rooms to Kitchens</p>
+</div>
+<div class="w3-row-padding">
+  <div class="w3-col l3 m6 w3-margin-bottom">
+    <div class="w3-display-container">
+      
+
+  <div class="img-comp-container">
+      <div class="img-comp-img">
+          <img src="kitchen.png" alt="living room before" style="border:5px solid black" width="500" height="300">
+      </div>
+  <div class="img-comp-img img-comp-overlay">
+    <img src="kitchen2.png" alt="living room after"style="border:5px solid black" width="500" height="300">
+  </div>
+  </div>
+</div>
+</div>
+</div>
+
+  <div class="w3-row-padding">
+</div>
+<div class="w3-row-padding">
+</div>
+  <!-- About Section -->
+  <div class="w3-container w3-padding-32" id="about">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">About</h3>
+    <p>Welcome to StyleSnap, your go-to virtual assistant for transforming your living spaces effortlessly! 🏠✨</p>
+
+      <p> Are you tired of your dull, lifeless room? Does your space need a makeover but you're lacking inspiration? No worries! SytleSnap is here to save the day with a touch of AI magic. 💫</p>
+      
+        <p> Our intelligent platform harnesses the power of advanced AI algorithms to understand your unique style preferences and recreate your room with panache. Say goodbye to endless hours of scrolling through design ideas and hello to a personalized, refreshed space that reflects your personality. 🛋️🖼️</p>
+      
+          <p>  At StyleSnap, we believe everyone deserves a beautiful and comfortable living environment, and we're committed to making your redecorating journey a breeze. Just provide us with some basic information about your room, and our AI decorator will conjure up a stunning new design for you in an instant. 🌟</p>
+      
+            <p> Ready to turn your dream room into reality? Step into the future of interior design with StyleSnap and watch your space transform! 🚀🎉
+    </p>
+  </div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-24 w3-light-grey w3-center">
+  <h4>Follow Us</h4>
+  <a href="#" class="w3-button w3-light-grey w3-hover-white w3-margin-right w3-margin-bottom"><i class="fa fa-facebook-official"></i></a>
+  <a href="#" class="w3-button w3-light-grey w3-hover-white w3-margin-right w3-margin-bottom"><i class="fa fa-twitter"></i></a>
+  <a href="#" class="w3-button w3-light-grey w3-hover-white w3-margin-right w3-margin-bottom"><i class="fa fa-linkedin"></i></a>
+  <a href="#" class="w3-button w3-light-grey w3-hover-white w3-margin-right w3-margin-bottom"><i class="fa fa-instagram"></i></a>
+  <p>&copy; 2023 StyleSnap. All rights reserved.</p>
+</footer>
+
+<!--END OF PAGE CONTENT-->
+</div>
+
+<script>
+  let imageIndex = 0;
+  const imageArray = ['kitchen.png', 'output_0.png', 'kitchen2.png'];
+  
+  function changeImage() {
+    imageIndex = (imageIndex + 1) % imageArray.length;
+    document.getElementById('changingImage').src = imageArray[imageIndex];
+  }
+  
+  setInterval(changeImage, 3000);
+</script>
+<script>
+/*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
+initComparisons();
+</script>
+
+</body>
+</html>
