@@ -4,7 +4,7 @@ Hello! 👋 I'm a seasoned Analyst with over 11 years of experience in the publi
 
 I'm passionate about continuous learning and professional development, and I'm always looking for new ways to expand my skill set and stay on the cutting edge of technology.
 
-## 💫 Liitle Bit More About Me
+## 💫 Little Bit More About Me
 <p>🔭 I'm currently working on www.Designai.us and WeatherSense</p>
 <p>🌱 I'm currently learning Django</p>
 <p>💬 Ask me about Python, Flask, OpenAi APIs</p>
